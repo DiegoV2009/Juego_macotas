@@ -7,31 +7,42 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body> 
-        <section id = "titulo">
-            <h1 id = "titulo_id" class ="titulo"> elementos 💧🔥🍃🌄</h1> <!--Título de la app, solo se puede usar una vez-->
-        </section>
+        
+        <h1 id = "titulo_id" class ="titulo"> Mokepon</h1> <!--Título de la app, solo se puede usar una vez-->
+        
         <section id = "seleccionar_mascota"> 
             
-            <h2>Elige a tu mascota</h2> <!--Puede ponerse varias veces, subtitulos-->
+            <h2 class ="subtitulos">Elige a tu mascota</h2> <!--Puede ponerse varias veces, subtitulos-->
 
-                <label class="tarjeta_de_juego" for="hipodoge">Hipodoge</label> <!--es un label que va con el radio-->
-                <input type = "radio" name = "mascota" id = "hipodoge"/>  <!--Hay que agrupar los radios en grupos, y ponerle nombre al grupo, el id es el valor que se le da al input radio-->
-                
-                <label class="tarjeta_de_juego" for = "capipepo">Capipepo</label>  <!--es un label que va con el radio-->
-                <input type = "radio" name = "mascota" id = "capipepo"/>  <!--Entrada de texto, hay diferentes inputs como: number, char, time, date, radio, checkbox...-->
-                
-                <label class="tarjeta_de_juego" for = "ratihueya">Ratihueya</label>  
-                <input type = "radio" name = "mascota" id = "ratihueya"/>  
-                
-                <label class="tarjeta_de_juego" for = "langostelvis">Langostelvis</label>
-                <input type = "radio" name = "mascota" id = "langostelvis"/>  
-                
-                <label class="tarjeta_de_juego" for = "tucapalma">Tucapalma</label>
-                <input type = "radio" name = "mascota" id = "tucapalma"/>  
-                
-                <label class="tarjeta_de_juego" for = "pydos">Pydos</label>
-                <input type = "radio" name = "mascota" id = "pydos"/> 
+                <div class = "tarjetas">
+                    <label class="tarjeta_de_juego" for="hipodoge">
+                        <p>Hipodoge</p>
+                        <img src="imagenes/mokepons_mokepon_hipodoge_attack.png" alt="Hipodoge">
+                    </label> <!--es un label que va con el radio-->
+                    <input type = "radio" name = "mascota" id = "hipodoge"/>  <!--Hay que agrupar los radios en grupos, y ponerle nombre al grupo, el id es el valor que se le da al input radio-->
+                    
+                    <label class="tarjeta_de_juego" for = "capipepo">
+                        <p>Capipepo</p>
+                        <img src="imagenes/mokepons_mokepon_capipepo_attack.png" alt="capipepo">
+                    </label>  <!--es un label que va con el radio-->
+                    <input type = "radio" name = "mascota" id = "capipepo"/>  <!--Entrada de texto, hay diferentes inputs como: number, char, time, date, radio, checkbox...-->
+                    <label class="tarjeta_de_juego" for = "ratihueya">
+                        <p>Ratihueya</p>
+                        <img src="imagenes/mokepons_mokepon_ratigueya_attack.png" alt="Ratihueya">
+                    </label>  
+                    <input type = "radio" name = "mascota" id = "ratihueya"/>  
+                </div>
 
+                <div class = "tarjetas">
+                    <label class="tarjeta_de_juego" for = "langostelvis">Langostelvis</label>
+                    <input type = "radio" name = "mascota" id = "langostelvis"/>  
+                    
+                    <label class="tarjeta_de_juego" for = "tucapalma">Tucapalma</label>
+                    <input type = "radio" name = "mascota" id = "tucapalma"/>  
+                    
+                    <label class="tarjeta_de_juego" for = "pydos">Pydos</label>
+                    <input type = "radio" name = "mascota" id = "pydos"/> 
+                </div>
                 <button class = "sty_btn_seleccionar" id = "boton_mascota">Seleccionar</button>
         </section>
 
