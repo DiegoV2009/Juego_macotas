@@ -1,12 +1,14 @@
-#titulo{
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+
+body{
+    font-family: 'Bungee Shade', cursive;   
+    background: black;
+}
+
+.titulo{
     color:white;
-    background-color: black; 
-    border: 3px solid white;
-    padding-inline-start: 30px;
     display: flex; /*Manejar el display como flex*/
-    flex-direction: column; /*Organizar los elementos por coumna*/
     justify-content: center;/*centrados*/
-    align-items: center;
 }
 
 #seleccionar_mascota{
@@ -19,29 +21,50 @@
     align-items: center;/*alinear elementos en el centro*/
     border: 1px solid blue;
     margin: 100px;
+    border-radius: 40px;
 }
 
 .tarjeta_de_juego{
-    width: 120px;
+    width: 200px;
     height: 120px;
     background: black;
-    padding-left: 25px;
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid blue;
-    
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjetas{
+    display: flex;
+    gap: 10px; 
+}
+
+
+
+.tarjeta_de_juego img{
+    width: 80px;
+    height: 80px;
 }
 
 .sty_btn_seleccionar{
-    background-color: red;
+    color:white;
+    font-family: 'Bungee Shade', cursive;  
+    background-color: black;
     width: 200px;
     height: 50px;
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid blue;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 input{
-    display: none;
+    display: none
 }

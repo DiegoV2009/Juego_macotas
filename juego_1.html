@@ -7,31 +7,50 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body> 
-        <section id = "titulo">
-            <h1 id = "titulo_id" class ="titulo"> Game of thrones ❄🐉🦁🐙🦌</h1> <!--Título de la app, solo se puede usar una vez-->
-        </section>
+        
+        <h1 id = "titulo_id" class ="titulo"> GAME OF THRONES</h1> <!--Título de la app, solo se puede usar una vez-->
+        
         <section id = "seleccionar_mascota"> 
             
-            <h2>Elige a tu Casa</h2> <!--Puede ponerse varias veces, subtitulos-->
+            <h2 class ="subtitulos">Elige a tu Casa</h2> <!--Puede ponerse varias veces, subtitulos-->
 
-                <label class="tarjeta_de_juego" for="hipodoge">  Targeryan<img src="./imagenes/targeryan.png" height ="90" width="90" /></label> <!--es un label que va con el radio-->
-                <input type = "radio" name = "mascota" id = "hipodoge"/>  <!--Hay que agrupar los radios en grupos, y ponerle nombre al grupo, el id es el valor que se le da al input radio-->
-                
-                <label class="tarjeta_de_juego" for = "capipepo">Baratheon<img src="./imagenes/baratheon.png" height ="90" width="70" /></label>  <!--es un label que va con el radio-->
-                <input type = "radio" name = "mascota" id = "capipepo"/>  <!--Entrada de texto, hay diferentes inputs como: number, char, time, date, radio, checkbox...-->
-                
-                <label class="tarjeta_de_juego" for = "ratihueya">Stark<img src="./imagenes/stark.png" height ="90" width="70" /></label>  
-                <input type = "radio" name = "mascota" id = "ratihueya"/>  
-                
-                <label class="tarjeta_de_juego" for = "langostelvis">Greyjoy<img src="./imagenes/greyjoy.png" height ="90" width="70" /></label>
-                <input type = "radio" name = "mascota" id = "langostelvis"/>  
-                
-                <label class="tarjeta_de_juego" for = "tucapalma">Lannister<img src="./imagenes/lanister.png" height ="90" width="70" /></label>
-                <input type = "radio" name = "mascota" id = "tucapalma"/>  
-                
-                <label class="tarjeta_de_juego" for = "pydos">ninguna</label>
-                <input type = "radio" name = "mascota" id = "pydos"/> 
+                <div class = "tarjetas">
+                    <label class="tarjeta_de_juego" for="hipodoge">
+                        <p>Stark</p>
+                        <img src="imagenes/stark.png" alt="Stark">
+                    </label> <!--es un label que va con el radio-->
+                    <input type = "radio" name = "mascota" id = "hipodoge"/>  <!--Hay que agrupar los radios en grupos, y ponerle nombre al grupo, el id es el valor que se le da al input radio-->
+                    
+                    <label class="tarjeta_de_juego" for = "capipepo">
+                        <p>Baratheon</p>
+                        <img src="imagenes/baratheon.png" alt="Baratheon">
+                    </label>  <!--es un label que va con el radio-->
+                    <input type = "radio" name = "mascota" id = "capipepo"/>  <!--Entrada de texto, hay diferentes inputs como: number, char, time, date, radio, checkbox...-->
+                    <label class="tarjeta_de_juego" for = "ratihueya">
+                        <p>Lanister</p>
+                        <img src="imagenes/lanister.png" alt="Lanister">
+                    </label>  
+                    <input type = "radio" name = "mascota" id = "ratihueya"/>  
+                </div>
 
+                <div class = "tarjetas">
+                    <label class="tarjeta_de_juego" for = "langostelvis">
+                        <p>Targeryan</p>
+                        <img src="imagenes/targeryan.png" alt="Targeryan">
+                    </label>
+                        
+                    <input type = "radio" name = "mascota" id = "langostelvis"/>  
+                    
+                    <label class="tarjeta_de_juego" for = "tucapalma">
+                        <p>Greyjoy</p>
+                        <img src="imagenes/greyjoy.png" alt="Greyjoy">
+                    </label>
+                        
+                    <input type = "radio" name = "mascota" id = "tucapalma"/>  
+                    
+                    <label class="tarjeta_de_juego" for = "pydos">OTRA</label>
+                    <input type = "radio" name = "mascota" id = "pydos"/> 
+                </div>
                 <button class = "sty_btn_seleccionar" id = "boton_mascota">Seleccionar</button>
         </section>
 
