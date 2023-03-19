@@ -1,26 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
 
 body{
-    font-family: 'Bungee Shade', cursive;   
-    background: black;
+    font-family: 'Frijole', cursive;
+    background: url("mundo_pokemon.png");
 }
 
 .titulo{
-    color:white;
+    color:black;
+    font-size: 64px;
     display: flex;
     justify-content: center;
 }
 
 #seleccionar_mascota{
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: none;
     height: 100hv; /*100hv es para todo lo visible en pantalla*/
     display: flex; /*Manejar el display como flex*/
     flex-direction: column; /*Organizar los elementos por coumna*/
     justify-content: center;/*centrados*/
     align-items: center;/*alinear elementos en el centro*/
-    border: 3px solid blue;
+    border: 3px solid brown;
     margin: 100px;
     border-radius: 40px;
 }
@@ -32,12 +33,14 @@ body{
 }
 
 .tarjeta_de_juego{
-    width: 200px;
+    font-size: 20px;
+    color: black;
+    width: 260px;
     height: 120px;
-    background: black;
+    background: none;
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid blue;
+    border: 1px solid brown;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -45,20 +48,21 @@ body{
 }
 
 .tarjeta_de_juego img{
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
 }
 
 .sty_btn_seleccionar{
-    color:white;
-    font-family: 'Bungee Shade', cursive;  
-    background-color: black;
+    font-family: 'Frijole', cursive;
+    font-size: 20px;
+    color:black;  
+    background-color: brown;
     width: 200px;
     height: 50px;
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid blue;
+    border: 1px solid brown;
     border-radius: 20px;
     display: flex;
     align-items: center;
