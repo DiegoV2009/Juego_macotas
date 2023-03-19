@@ -1,0 +1,47 @@
+#titulo{
+    color:white;
+    background-color: black; 
+    border: 3px solid white;
+    padding-inline-start: 30px;
+    display: flex; /*Manejar el display como flex*/
+    flex-direction: column; /*Organizar los elementos por coumna*/
+    justify-content: center;/*centrados*/
+    align-items: center;
+}
+
+#seleccionar_mascota{
+    color: white;
+    background-color: black;
+    height: 100hv; /*100hv es para todo lo visible en pantalla*/
+    display: flex; /*Manejar el display como flex*/
+    flex-direction: column; /*Organizar los elementos por coumna*/
+    justify-content: center;/*centrados*/
+    align-items: center;/*alinear elementos en el centro*/
+    border: 1px solid blue;
+    margin: 100px;
+}
+
+.tarjeta_de_juego{
+    width: 120px;
+    height: 120px;
+    background: black;
+    padding-left: 25px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid blue;
+    
+}
+
+.sty_btn_seleccionar{
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid blue;
+}
+
+input{
+    display: none;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/> 
+        <title> Juegazo ☯</title>
+        <script src="./js/juego_1.js"> //para conectar html con js</script> 
+    </head>
+    <body>
+        <h1> elementos 💧🔥🍃🌄</h1> <!--Título de la app, solo se puede usar una vez-->
+        
+        <section id = "Seleccionar_mascota"> 
+            <h2>Elige a tu mascota</h2> <!--Puede ponerse varias veces, subtitulos-->
+
+                <input type = "radio"/>  <!--Entrada de texto, hay diferentes inputs como: number, char, time, date, radio, checkbox...-->
+                <label>hipodoge</label> <!--es un label que va con el radio-->
+                <input type = "radio" id = "hipodoge" name ="mascota"/>  <!--Hay que agrupar los radios en grupos, y ponerle nombre al grupo, el id es el valor que se le da al input radio-->
+                <label for = "hipodoge(el id del input)">capipepo</label> <!-- Así Se junta el label con el input-->
+                <input type = "radio" name ="mascota"  id = "hipodoge"/> <!-- No importa el orden entre id y name-->
+                Hipoge -> Agua
+                Capipepo -> Tierra 
+                Ratihueya -> Fuego
+                Langostelvis -> Agua y Fuego 
+                Tucapalma -> Agua y Tierra 
+                Pydos    -> Tierra y Fuego 
+
+            <button id = "boton_mascota">Seleccionar</button>
+        </section>
+
+        <section id = "Seleccionar_ataque"> <!--secction es para dividir por secciones-->
+            <h2>Elige tu ataque: </h2>
+            <p> Tu mascota tiene <span>3</span> vidas</p>
+            <p> La mascota de tu enemigo tiene <span>3</span> vidas</p>
+
+            <p> <!--Me pone textos en parrafos-->
+                <button id = "boton_fuego">fuego 🔥</button> <!--Botones-->
+                <button id  = "boton_agua">agua 💧</button>
+                <button id = "boton tierra">tierra 🌱</button>
+            </p>
+
+        </section>
+
+        <section id = "Mensajes">
+            <p>Tu mascota atacó con FUEGO, La mascota del enemigo atacó con TIERRA -GANASTE 🎉</p>
+        </section>
+       
+        <section id = "Reinciar">
+            <button id = "boton_reiniciar">Reiniciar</button>
+        </section>
+
+    </body>
+</html>
