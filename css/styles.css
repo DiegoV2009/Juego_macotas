@@ -72,3 +72,33 @@ body{
 input{
     display: none;
 }
+
+#seleccionar_ataque{
+    /*display: flex; no es necesario porque ya esta display flex en js*/ 
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton_de_ataque{
+    font-family: 'Frijole', cursive;
+    background-color: brown;
+    border-radius: 20px;
+    width: 110px;
+    height: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-color: black;
+}
+
+#Mensajes{
+    margin-top: 20px;
+    padding: 20px;
+    width: 180px;
+    background: brown;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Frijole', cursive;
+    border-color: black;
+    
+}

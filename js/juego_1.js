@@ -54,19 +54,27 @@ function Combate(){  //ataque enemigo vs mi ataque
 
 function CrearMensaje(resultado){ //metodo para crear un parrafo de ataque nuevo
 
-    let sectionMensajes = document.getElementById('Mensajes') //en la sección que queremos poner el parrafo
-    let parrafo  = document.createElement('p') 
-    
-    parrafo.innerHTML = 'Tu mascota atacó con '+ataqueJugador+', La mascota del enemigo atacó con '+ataqueEnemigo+ ', '+resultado
+    let sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
+    let ataquesDelJugador = document.getElementById('ataques_del_jugador')
+    let ataquesDelEnemigo = document.getElementById('ataques_del_enemigo')
 
-    sectionMensajes.appendChild(parrafo)
+    
+    let nuevoAtaqueDelJugador = document.createElement('p') //crea un parrafo
+    let nuevoAtaqueDelEnemigo = document.createElement('p')
+    
+    sectionMensajes.innerHTML = resultado //reemplaza el contenido de resultado
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    
+    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador) //añade el parrafo al final de lo que ya está anteriormente
+    ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 }
 
 function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final (ganaste o perdiste)
    
     //dar visibilidad al boton de reiniciar
-    let secctionReiniciar = document.getElementById('reiniciar')
-    secctionReiniciar.style.display = 'block' 
+    let secctionReiniciar = document.getElementById('resultado')
+    secctionReiniciar.style.display = 'flex' 
 
     let sectionMensajes = document.getElementById('Mensajes') //en la sección que queremos poner el parrafo
     let parrafo  = document.createElement('p') 
@@ -89,7 +97,7 @@ function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final
 function seleccionarMascotaJugador(){ 
     //dar visibilidad a la sección de combate
     let sectionSeleccionarAtaque = document.getElementById('seleccionar_ataque')
-    sectionSeleccionarAtaque.style.display = 'block'
+    sectionSeleccionarAtaque.style.display = 'flex'
 
     //esconder la sección de elegir mascota
     let sectionSeleccionarMacota = document.getElementById('seleccionar_mascota')
