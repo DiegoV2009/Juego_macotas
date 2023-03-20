@@ -73,9 +73,19 @@ input{
     display: none;
 }
 
+input:checked + label{
+    background-color: brown;
+}
+
 #seleccionar_ataque{
     /*display: flex; no es necesario porque ya esta display flex en js*/ 
     flex-direction: column;
+    align-items: center;
+}
+
+#ataques{
+    display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -97,8 +107,47 @@ input{
     background: brown;
     border-radius: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     font-family: 'Frijole', cursive;
     border-color: black;
-    
+
+}
+
+#boton_reiniciar{
+    font-family: 'Frijole', cursive;
+    border: none;
+    color:brown
+}
+
+.ataque{
+    display: grid;
+    grid-template-columns: 100px 100px;
+    justify-content: space-between;
+}
+
+.ataque_jugador{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.ataque_enemigo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+}
+
+
+@media (max-width: 460px){ /*media  query que nos dice que hacer si el dispositivo tiene tamaño max de 360px (celulares)*/
+    .tarjetas{
+        flex-direction: column;
+
+    }
+    #ataques{
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -73,15 +73,11 @@ function CrearMensaje(resultado){ //metodo para crear un parrafo de ataque nuevo
 function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final (ganaste o perdiste)
    
     //dar visibilidad al boton de reiniciar
-    let secctionReiniciar = document.getElementById('resultado')
+    let secctionReiniciar = document.getElementById('reiniciar')
     secctionReiniciar.style.display = 'flex' 
 
-    let sectionMensajes = document.getElementById('Mensajes') //en la sección que queremos poner el parrafo
-    let parrafo  = document.createElement('p') 
-    
-    parrafo.innerHTML = resultadoFinal
-
-    sectionMensajes.appendChild(parrafo)
+    let sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
+    sectionMensajes.innerHTML = resultadoFinal
 
     //deshabilitar los botones cuando ya se ganó o perdió
     let botonMascotaJugador = document.getElementById('boton_mascota') 
