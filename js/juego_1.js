@@ -1,29 +1,48 @@
+const sectionSeleccionarAtaque = document.getElementById('seleccionar_ataque')
+const secctionReiniciar = document.getElementById('reiniciar')
+const botonMascotaJugador = document.getElementById('boton_mascota') //const para crear objeto o variable que no cambia, aqui pedimos a nuectro documento html que obtenga el elemento id de boton mascota
+const botonFuego = document.getElementById('boton_fuego')
+const botonTierra = document.getElementById('boton_tierra')
+const botonAgua = document.getElementById('boton_agua')
+const botonReiniciar = document.getElementById('boton_reiniciar')
+
+
+const sectionSeleccionarMacota = document.getElementById('seleccionar_mascota')
+const inputHipodoge = document.getElementById('hipodoge')
+const inputCapipepo = document.getElementById('capipepo')
+const inputRatihueya = document.getElementById('ratihueya')
+const inputLangostelvis = document.getElementById('langostelvis')
+const inputTucapalma = document.getElementById('tucapalma')
+const inputPydos = document.getElementById('pydos')
+const spanMascotaJugador = document.getElementById('mascotaJugador')
+
+const spanMascotaEnemigo = document.getElementById('mascotaEnemigo')
+
+const sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
+const ataquesDelJugador = document.getElementById('ataques_del_jugador')
+const ataquesDelEnemigo = document.getElementById('ataques_del_enemigo')
+
+const spanVidasJugador = document.getElementById('vidas_jugador')
+const spanVidasEnemigo = document.getElementById('vidas_enemigo')
+
 let ataqueJugador
 let ataqueEnemigo 
 let vidasEnemigo = 3
 let vidasPropias = 3
 
 
-function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado todo el html
-    
+function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado todo el html  
     //esconder los ataques y el boton de reiniciar del html, mientras no hemos elegido la mascota
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar_ataque')
     sectionSeleccionarAtaque.style.display = 'none'
-    let secctionReiniciar = document.getElementById('reiniciar')
     secctionReiniciar.style.display = 'none'
     
     //botones
-    let botonMascotaJugador = document.getElementById('boton_mascota') //let para crear objeto o variable, aqui pedimos a nuectro documento html que obtenga el elemento id de boton mascota
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador) //que el boton escuche el evento de darle click
-
-    let botonFuego = document.getElementById('boton_fuego')
+    
     botonFuego.addEventListener('click', ataqueFuego)
-    let botonTierra = document.getElementById('boton_tierra')
     botonTierra.addEventListener('click', ataqueTierra)
-    let botonAgua = document.getElementById('boton_agua')
     botonAgua.addEventListener('click', ataqueAgua)
-
-    let botonReiniciar = document.getElementById('boton_reiniciar')
+    
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
@@ -32,7 +51,6 @@ function aleatorio (min, max){ //da un numero aleatorio
 }
 
 function Combate(){  //ataque enemigo vs mi ataque
-  
     if(ataqueEnemigo == ataqueJugador){
         CrearMensaje('Empate 🥱')
     }else if ((ataqueEnemigo == 'Fuego' && ataqueJugador == 'Agua') || (ataqueEnemigo == 'Tierra' && ataqueJugador == 'Fuego') || (ataqueEnemigo == 'Agua' && ataqueJugador == 'Tierra')){
@@ -44,21 +62,12 @@ function Combate(){  //ataque enemigo vs mi ataque
     }
     
     //vidas propias y del enemigo
-    let spanVidasJugador = document.getElementById('vidas_jugador')
     spanVidasJugador.innerHTML = vidasPropias
-    let spanVidasEnemigo = document.getElementById('vidas_enemigo')
     spanVidasEnemigo.innerHTML = vidasEnemigo
-
     revisarVidas()
 }
 
 function CrearMensaje(resultado){ //metodo para crear un parrafo de ataque nuevo
-
-    let sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
-    let ataquesDelJugador = document.getElementById('ataques_del_jugador')
-    let ataquesDelEnemigo = document.getElementById('ataques_del_enemigo')
-
-    
     let nuevoAtaqueDelJugador = document.createElement('p') //crea un parrafo
     let nuevoAtaqueDelEnemigo = document.createElement('p')
     
@@ -73,7 +82,6 @@ function CrearMensaje(resultado){ //metodo para crear un parrafo de ataque nuevo
 function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final (ganaste o perdiste)
    
     //dar visibilidad al boton de reiniciar
-    let secctionReiniciar = document.getElementById('reiniciar')
     secctionReiniciar.style.display = 'flex' 
 
     let sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
@@ -92,22 +100,12 @@ function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final
 
 function seleccionarMascotaJugador(){ 
     //dar visibilidad a la sección de combate
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar_ataque')
     sectionSeleccionarAtaque.style.display = 'flex'
 
     //esconder la sección de elegir mascota
-    let sectionSeleccionarMacota = document.getElementById('seleccionar_mascota')
     sectionSeleccionarMacota.style.display = 'none'
 
     //logica de selección de mascota
-    let inputHipodoge = document.getElementById('hipodoge')
-    let inputCapipepo = document.getElementById('capipepo')
-    let inputRatihueya = document.getElementById('ratihueya')
-    let inputLangostelvis = document.getElementById('langostelvis')
-    let inputTucapalma = document.getElementById('tucapalma')
-    let inputPydos = document.getElementById('pydos')
-    let spanMascotaJugador = document.getElementById('mascotaJugador')
-
     if(inputHipodoge.checked){
         spanMascotaJugador.innerHTML = 'Hipodoge'
     } else if(inputCapipepo.checked){
@@ -129,7 +127,6 @@ function seleccionarMascotaJugador(){
 
 function seleccionarMascotaEnemigo(){ 
     let Enemigoaleatorio = aleatorio(1,6)
-    let spanMascotaEnemigo = document.getElementById('mascotaEnemigo')
     if(Enemigoaleatorio == 1){
         //hipodoge
         spanMascotaEnemigo.innerHTML = 'Hipodoge'
