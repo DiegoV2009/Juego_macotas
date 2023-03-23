@@ -61,9 +61,9 @@ class Mokepon{ //clase Mokepon
 let hipodoge = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5)
 let capipepo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5)
 let ratihueya = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5)
-let tucapalma = new Mokepon('Tucpalma',"imagenes/mokepons_mokepon_tucapalma_attack.png", 5)
 let langostelvis = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5)
 let pydos = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5)
+let tucapalma = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5)
 
 hipodoge.ataques.push(
     {nombre: '💧', id :'boton_agua'},    
@@ -138,8 +138,8 @@ function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado
         inputCapipepo = document.getElementById('Capipepo')
         inputRatihueya = document.getElementById('Ratihueya')
         inputLangostelvis = document.getElementById('Langostelvis')
-        inputTucapalma = document.getElementById('Tucapalma')
         inputPydos = document.getElementById('Pydos')
+        inputTucapalma = document.getElementById('Tucapalma')
 
     })
     
@@ -187,14 +187,13 @@ function seleccionarMascotaJugador(){
     } else if(inputLangostelvis.checked){     
         mascotaJugador = inputLangostelvis.id
         imagenMascotaJugador = langostelvis.foto
+    }else if(inputPydos.checked){    
+        mascotaJugador = inputPydos.id
+        imagenMascotaJugador = pydos.foto
     }else if(inputTucapalma.checked){   
         mascotaJugador = inputTucapalma.id
         imagenMascotaJugador = tucapalma.foto
-    }
-    else if(inputPydos.checked){    
-        mascotaJugador = inputPydos.id
-        imagenMascotaJugador = pydos.foto
-    } else{
+    }else{
         alert("No seleccionaste una mascota")
     }
     
