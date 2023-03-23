@@ -27,25 +27,35 @@
                 <!--botones-->
             </div>
  
-            <div id = "Mensajes">
-                <p id="resultado">Mucha suerte</p>
-                <section id = "reiniciar">
-                    <button id = "boton_reiniciar">Reiniciar</button>
-                </section>
-            </div>
+            
            
             <div class = "ataque">
+                <div class="dibujo_mascota" id="dibujo_mascota_jugador" >
+                    width:100px;
+                </div>
                 <div class = "ataque_jugador">
                     <p id="victorias_jugador">0</p>
                     <p id = "mascotaJugador"></p>
                     <div id="ataques_del_jugador"></div>
-                    
+                </div>
+                <div class = "resultado_guerra">
+                    <p>.</p>
+                    <p>Batallas</p>
+                    <div id = "resultado_de_guerra"></div>
                 </div>
                 <div class = "ataque_enemigo">
                     <p id ="victorias_enemigo">0</p>
                     <p id = "mascotaEnemigo"></p>
                     <div id="ataques_del_enemigo"></div>
                 </div>
+                <div class="dibujo_mascota" id="dibujo_mascota_enemigo" >
+                </div>
+            </div>
+            <div id = "Mensajes">
+                <p id="resultado">Mucha suerte</p>
+                <section id = "reiniciar">
+                    <button id = "boton_reiniciar">Reiniciar</button>
+                </section>
             </div>
         </section>
         <script src="./js/juego_1.js">//para conectar html con js</script>

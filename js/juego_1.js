@@ -5,17 +5,21 @@ const botonReiniciar = document.getElementById('boton_reiniciar')
 
 
 const sectionSeleccionarMacota = document.getElementById('seleccionar_mascota')
+const sectionTitulo = document.getElementById('titulo_id')
 const spanMascotaJugador = document.getElementById('mascotaJugador')
 
 const spanMascotaEnemigo = document.getElementById('mascotaEnemigo')
 
 const sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
+const sectionResultadoBatalla = document.getElementById('resultado_de_guerra')
 const ataquesDelJugador = document.getElementById('ataques_del_jugador')
 const ataquesDelEnemigo = document.getElementById('ataques_del_enemigo')
 
 const spanVictoriasDelJugador = document.getElementById('victorias_jugador')
 const spanVictoriasDelEnemigo = document.getElementById('victorias_enemigo')
 const contenedorTarjetas = document.getElementById('contenedor_tarjetas')
+const mascotaEnemigaPantalla2 = document.getElementById('dibujo_mascota_enemigo')
+const mascotaJugadorPantalla2 = document.getElementById('dibujo_mascota_jugador')
 const contenedorBotonesAtaque = document.getElementById('ataques')
 
 let mokepones = [] //arreglo donde tendremos los objetos de la calse Mokepon
@@ -29,6 +33,8 @@ let inputLangostelvis
 let inputTucapalma 
 let inputPydos 
 let mascotaJugador
+let imagenMascotaJugador
+let imagenMascotaEnemiga
 let botonesDeAtaque
 let ataquesMokeponEnemigo
 let botonFuego 
@@ -40,6 +46,7 @@ let indexAtaqueEnemigo
 let ataquesUsadosEnemigo = []
 let vicotirasDelEnemigo = 0
 let victoriasPropias = 0
+
 
 class Mokepon{ //clase Mokepon
     constructor(nombre, foto, vida){
@@ -165,27 +172,28 @@ function seleccionarMascotaJugador(){
 
     //esconder la sección de elegir mascota
     sectionSeleccionarMacota.style.display = 'none'
+    sectionTitulo.style.display = 'none'
 
     //logica de selección de mascota
     if(inputHipodoge.checked){
-        spanMascotaJugador.innerHTML = inputHipodoge.id
         mascotaJugador = inputHipodoge.id
+        imagenMascotaJugador = hipodoge.foto
     } else if(inputCapipepo.checked){
-        spanMascotaJugador.innerHTML = inputCapipepo.id
         mascotaJugador = inputCapipepo.id
+        imagenMascotaJugador = capipepo.foto
     } else if(inputRatihueya.checked){
-        spanMascotaJugador.innerHTML = inputRatihueya.id      
         mascotaJugador = inputRatihueya.id
-    } else if(inputLangostelvis.checked){
-        spanMascotaJugador.innerHTML = inputLangostelvis.id      
+        imagenMascotaJugador = ratihueya.foto
+    } else if(inputLangostelvis.checked){     
         mascotaJugador = inputLangostelvis.id
-    }else if(inputTucapalma.checked){
-        spanMascotaJugador.innerHTML = inputTucapalma.id      
+        imagenMascotaJugador = langostelvis.foto
+    }else if(inputTucapalma.checked){   
         mascotaJugador = inputTucapalma.id
+        imagenMascotaJugador = tucapalma.foto
     }
-    else if(inputPydos.checked){
-        spanMascotaJugador.innerHTML = inputPydos.id      
+    else if(inputPydos.checked){    
         mascotaJugador = inputPydos.id
+        imagenMascotaJugador = pydos.foto
     } else{
         alert("No seleccionaste una mascota")
     }
@@ -253,21 +261,20 @@ function secuenciaAtaque(){ //se crea un array de los ataques del jugador
 
 function seleccionarMascotaEnemigo(){  
     let Enemigoaleatorio = aleatorio(0, mokepones.length-1)
-    spanMascotaEnemigo.innerHTML = mokepones[Enemigoaleatorio].nombre
+    imagenMascotaEnemiga = mokepones[Enemigoaleatorio].foto
     ataquesMokeponEnemigo = mokepones[Enemigoaleatorio].ataques
-    //DibujarMacotasElegidas(spanMascotaJugador, spanMascotaEnemigo)
+    DibujarMacotasElegidas(imagenMascotaJugador, imagenMascotaEnemiga, mokepones[Enemigoaleatorio].nombre)
     secuenciaAtaque()
 }
 
-/*function DibujarMacotasElegidas(macotaJugador, mascotaEnemigo){
-    opcionDeMokepones = `
-            <label class="tarjeta_de_juego" for=${mokepon.nombre}>
-                <p>${mokepon.nombre}</p>
-                <img src=${mokepon.foto} alt=${mokepon.nombre}>
-            </label> <!--es un label que va con el radio-->
-        `
-        mokepones.indexOf
-}*/
+function DibujarMacotasElegidas(imMascotaJugador, mascotaEnemigo, nombreEnemigo){
+    let dibujoMascotaJugador
+    let dibujoMacotaEnemigo
+    dibujoMascotaJugador = `<img src=${imMascotaJugador} alt=${mascotaJugador} style = width:150px> `
+    dibujoMacotaEnemigo = `<img src=${mascotaEnemigo} alt=${nombreEnemigo} style = width:150px>`
+    mascotaJugadorPantalla2.innerHTML = dibujoMascotaJugador
+    mascotaEnemigaPantalla2.innerHTML = dibujoMacotaEnemigo
+}
 
 function ataqueAleatorioEnemigo(){ //
     let ataqueEnemigoElegido = 0
@@ -288,15 +295,7 @@ function ataqueAleatorioEnemigo(){ //
     }else{ 
         ataqueEnemigo.push('Tierra')
     }
-
     ataquesUsadosEnemigo.push(numAtaqueEnemigo)
-    /*if  (numAtaqueEnemigo == 0 || numAtaqueEnemigo ==1){
-        ataqueEnemigo.push('Fuego')
-    }else if(numAtaqueEnemigo ==2 || numAtaqueEnemigo == 4){
-        ataqueEnemigo.push('Tierra')
-    }else{
-        ataqueEnemigo.push('Agua')
-    }*/
    iniciarPelea()
 }
 
@@ -316,14 +315,14 @@ function Combate(){  //ataque enemigo vs mi ataque
     for (let i = 0; i < ataqueJugador.length; i++) {
         if(ataqueEnemigo[i] === ataqueJugador[i]){
             indexAmbosOponentes(i, i)
-            CrearMensaje('Empate 🥱')
+            mensajeResultadoBatalla('Empate 🥱')
         }else if ((ataqueEnemigo[i] == 'Fuego' && ataqueJugador[i] == 'Agua') || (ataqueEnemigo[i] == 'Tierra' && ataqueJugador[i] == 'Fuego') || (ataqueEnemigo[i] == 'Agua' && ataqueJugador[i] == 'Tierra')){
             indexAmbosOponentes(i, i)
-            CrearMensaje('Ganaste 🎉🎉🎉')
+            mensajeResultadoBatalla('Ganaste 🎉🎉🎉')
             victoriasPropias = victoriasPropias+1
         }else{
             indexAmbosOponentes(i, i)
-            CrearMensaje('Perdiste 😭😭😭')
+            mensajeResultadoBatalla('Perdiste 😭😭😭')
             vicotirasDelEnemigo = vicotirasDelEnemigo+1
         }
         
@@ -335,16 +334,20 @@ function Combate(){  //ataque enemigo vs mi ataque
     revisarVictorias()
 }
 
-function CrearMensaje(resultado){ //metodo para crear un parrafo de ataque nuevo
+
+function mensajeResultadoBatalla(mensaje)
+{
     let nuevoAtaqueDelJugador = document.createElement('p') //crea un parrafo
     let nuevoAtaqueDelEnemigo = document.createElement('p')
-    
-    sectionMensajes.innerHTML = resultado //reemplaza el contenido de resultado
+    let ResultadoBatalla = document.createElement('p')
+
     nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador
     nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
-    
+    ResultadoBatalla.innerHTML = mensaje
+
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador) //añade el parrafo al final de lo que ya está anteriormente
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
+    sectionResultadoBatalla.appendChild(ResultadoBatalla)
 }
 
 
