@@ -21,21 +21,21 @@ body{
     flex-direction: column; /*Organizar los elementos por coumna*/
     justify-content: center;/*centrados*/
     align-items: center;/*alinear elementos en el centro*/
-    border: 3px solid brown;
     margin: 100px;
-    border-radius: 40px;
 }
 
 
 .tarjetas{
     display: flex;
     gap: 10px; 
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tarjeta_de_juego{
     font-size: 20px;
     color: black;
-    width: 260px;
+    width: 300px;
     height: 120px;
     background: none;
     box-sizing: border-box;
@@ -93,11 +93,12 @@ input:checked + label{
     font-family: 'Frijole', cursive;
     background-color: brown;
     border-radius: 20px;
-    width: 110px;
+    width: 80px;
     height: 60px;
     padding: 10px;
     box-sizing: border-box;
     border-color: black;
+    margin: 10px;
 }
 
 #Mensajes{
@@ -130,14 +131,14 @@ input:checked + label{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-right: 10px;
+    padding-right: 90px;
 }
 
 .ataque_enemigo{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 10px;
+    padding-left: 90px;
 }
 
 
