@@ -155,7 +155,29 @@ input:checked + label{
     height: 100px;
 }
 
-@media (max-width: 460px){ /*media  query que nos dice que hacer si el dispositivo tiene tamaño max de 360px (celulares)*/
+#ver_mapa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#ver_mapa button {
+    font-size: 40px;
+    color: white;
+    width: 100px;
+    height: 60px;
+    background: black;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+#mapa{
+    border:2px solid white;
+}
+
+
+@media (max-width: 560px){ /*media  query que nos dice que hacer si el dispositivo tiene tamaño max de 360px (celulares)*/
     .tarjetas{
         flex-direction: column;
 
@@ -164,4 +186,12 @@ input:checked + label{
         display: flex;
         flex-direction: column;
     }
+}
+
+@media (max-width: 300px){ /*media  query que nos dice que hacer si el dispositivo tiene tamaño max de 360px (celulares)*/
+    #ver_mapa div{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }   
 }

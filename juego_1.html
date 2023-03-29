@@ -4,6 +4,7 @@
         <meta charset="utf-8"/> 
         <title> Juegazo ☯</title>
         <link rel="stylesheet" href="./css/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body> 
         
@@ -20,14 +21,22 @@
                 <button class = "sty_btn_seleccionar" id = "boton_mascota">Seleccionar</button>
         </section>
 
+        <section id="ver_mapa"> <!--esta sección es para el mpa, se crea un canvas que se llama mapa-->
+            <h2 > Recorre el mapa con tu mokepon</h2>
+            <canvas id="mapa"></canvas>
+            <button onmouseup="detenerMovimiento()" onmousedown = "moverArriba()">⬆</button>
+            <div>
+                <button onmouseup="detenerMovimiento()" onmousedown = "moverIzquierda()">⬅</button>
+                <button onmouseup="detenerMovimiento()" onmousedown = "moverAbajo()">⬇</button>
+                <button onmouseup="detenerMovimiento()" onmousedown = "moverDerecha()">➡</button>
+            </div>
+        </section>
+        
         <section id = "seleccionar_ataque"> <!--secction es para dividir por secciones-->
             <h2>Elige tu ataque: </h2>
             <div id = "ataques"> 
                 <!--botones-->
             </div>
- 
-            
-           
             <div class = "ataque">
                 <div class="dibujo_mascota" id="dibujo_mascota_jugador" >
                     width:100px;

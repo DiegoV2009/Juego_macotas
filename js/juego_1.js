@@ -22,7 +22,12 @@ const mascotaEnemigaPantalla2 = document.getElementById('dibujo_mascota_enemigo'
 const mascotaJugadorPantalla2 = document.getElementById('dibujo_mascota_jugador')
 const contenedorBotonesAtaque = document.getElementById('ataques')
 
+const secctionVerMapa = document.getElementById('ver_mapa')
+const mapa = document.getElementById('mapa')
+const anchoMaximoDelMapa = 600
+
 let mokepones = [] //arreglo donde tendremos los objetos de la calse Mokepon
+let mokeponesEnemigos = []
 let ataqueJugador = []
 let ataqueEnemigo = []
 let opcionDeMokepones
@@ -33,6 +38,7 @@ let inputLangostelvis
 let inputTucapalma 
 let inputPydos 
 let mascotaJugador
+let mascotaJugadorObjeto
 let imagenMascotaJugador
 let imagenMascotaEnemiga
 let botonesDeAtaque
@@ -46,24 +52,66 @@ let indexAtaqueEnemigo
 let ataquesUsadosEnemigo = []
 let vicotirasDelEnemigo = 0
 let victoriasPropias = 0
+let lienzo = mapa.getContext("2d") //aquí creamos el canvas 2d 
+let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = "imagenes/mokemap.png";
+let alturaBuscada 
+let anchoDelMapa = window.innerWidth - 20
+
+
+
+
+if (anchoDelMapa > anchoMaximoDelMapa){
+    anchoDelMapa = anchoMaximoDelMapa-20
+}
+alturaBuscada = anchoDelMapa * 600/800
+
+mapa.width = anchoDelMapa
+mapa.height = alturaBuscada
 
 
 class Mokepon{ //clase Mokepon
-    constructor(nombre, foto, vida){
+    constructor(nombre, foto, vida, fotoMapa){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.ancho = 40
+        this.alto = 40
+        this.x = aleatorio(0, anchoDelMapa -this.ancho)
+        this.y = aleatorio(0, alturaBuscada - this.alto)
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = fotoMapa
+        this.velocidadX = 0
+        this.velocidadY = 0 
+    }
+
+    pintarMokepon(){
+        lienzo.drawImage( 
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
     }
 }
 
 //cramos objetos de la calase Mokepon
-let hipodoge = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5)
-let capipepo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5)
-let ratihueya = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5)
-let langostelvis = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5)
-let pydos = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5)
-let tucapalma = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5)
+let hipodoge = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5, 'imagenes/hipodoge.png')
+let capipepo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5, 'imagenes/capipepo.png')
+let ratihueya = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5, 'imagenes/ratigueya.png')
+let langostelvis = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5, 'imagenes/langostelvis.png')
+let pydos = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png')
+let tucapalma = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png')
+
+let hipodogeEnemigo = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5, 'imagenes/hipodoge.png')
+let capipepoEnemigo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5, 'imagenes/capipepo.png')
+let ratihueyaEnemigo = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5, 'imagenes/ratigueya.png')
+let langostelvisEnemigo = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5, 'imagenes/langostelvis.png')
+let pydosEnemigo = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png')
+let tucapalmaEnemigo = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png')
 
 hipodoge.ataques.push(
     {nombre: '💧', id :'boton_agua'},    
@@ -114,12 +162,63 @@ pydos.ataques.push(
     {nombre: '🌱', id :'boton_tierra'}
 )
 
+hipodogeEnemigo.ataques.push(
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+)
+
+capipepoEnemigo.ataques.push(
+    {nombre: '🌱', id :'boton_tierra'},
+    {nombre: '🌱', id :'boton_tierra'},
+    {nombre: '🌱', id :'boton_tierra'},
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_fuego'},
+)
+
+ratihueyaEnemigo.ataques.push( //push para agregar elementos a un arreglo
+    //creamos un objeto el cual solo tendra info, no requiere de clase
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🌱', id :'boton_tierra'}
+)
+
+tucapalmaEnemigo.ataques.push(
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+)
+
+langostelvisEnemigo.ataques.push(
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🌱', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+)
+
+pydosEnemigo.ataques.push(
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🌱', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+)
+
 mokepones.push(hipodoge, capipepo, ratihueya, tucapalma, langostelvis, pydos)
+mokeponesEnemigos.push(hipodogeEnemigo, capipepoEnemigo, ratihueyaEnemigo, tucapalmaEnemigo, langostelvisEnemigo, pydosEnemigo)
 
 function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado todo el html  
     //esconder los ataques y el boton de reiniciar del html, mientras no hemos elegido la mascota
     sectionSeleccionarAtaque.style.display = 'none'
     secctionReiniciar.style.display = 'none'
+    secctionVerMapa.style.display = 'none'
 
     mokepones.forEach(mokepon => { //por cada elemento del arreglo hace lo siguiente
         //aqui pondremos un enlace para manejar el dom de html desde js
@@ -146,6 +245,23 @@ function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado
     //botones
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador) //que el boton escuche el evento de darle click
     botonReiniciar.addEventListener('click', reiniciarJuego)
+
+    unirseAlJuego()   
+}
+
+function unirseAlJuego(){
+    //fetch("http://localhost:8080/unirse", {
+    //    method: "post"
+    //}) para un post
+    fetch("http://localhost:8080/unirse") //para get
+        .then(function (res){ //cuando ya ejecute fetch que es una función asincrona
+            if(res.ok){ //ok es si la petición se cumplio
+                res.text()
+                    .then(function(respueta){
+                        console.log(respueta)
+                    })
+            }
+        })
 }
 
 function aleatorio (min, max){ //da un numero aleatorio
@@ -153,27 +269,15 @@ function aleatorio (min, max){ //da un numero aleatorio
 }
 
 
-
-function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final (ganaste o perdiste)
-   
-    //dar visibilidad al boton de reiniciar
-    secctionReiniciar.style.display = 'flex' 
-
-    let sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
-    sectionMensajes.innerHTML = resultadoFinal
-
-    //deshabilitar los botones cuando ya se ganó o perdió
-
-}
-
 function seleccionarMascotaJugador(){ 
     //dar visibilidad a la sección de combate
-    sectionSeleccionarAtaque.style.display = 'flex'
-
+   //sectionSeleccionarAtaque.style.display = 'flex'
+    secctionVerMapa.style.display = 'flex'
     //esconder la sección de elegir mascota
     sectionSeleccionarMacota.style.display = 'none'
     sectionTitulo.style.display = 'none'
 
+   
     //logica de selección de mascota
     if(inputHipodoge.checked){
         mascotaJugador = inputHipodoge.id
@@ -196,9 +300,8 @@ function seleccionarMascotaJugador(){
     }else{
         alert("No seleccionaste una mascota")
     }
-    
+    iniciarMapa()    
     extraerAtaques(mascotaJugador)
-    seleccionarMascotaEnemigo()
 }
 
 function extraerAtaques(mascotaJugador){
@@ -258,11 +361,9 @@ function secuenciaAtaque(){ //se crea un array de los ataques del jugador
     
 }
 
-function seleccionarMascotaEnemigo(){  
-    let Enemigoaleatorio = aleatorio(0, mokepones.length-1)
-    imagenMascotaEnemiga = mokepones[Enemigoaleatorio].foto
-    ataquesMokeponEnemigo = mokepones[Enemigoaleatorio].ataques
-    DibujarMacotasElegidas(imagenMascotaJugador, imagenMascotaEnemiga, mokepones[Enemigoaleatorio].nombre)
+function seleccionarMascotaEnemigo(enemigo){  
+    ataquesMokeponEnemigo = enemigo.ataques
+    DibujarMacotasElegidas(imagenMascotaJugador, enemigo.foto, enemigo.nombre)
     secuenciaAtaque()
 }
 
@@ -362,12 +463,142 @@ function revisarVictorias(){ //revisar si tine más victorias el jugador o el en
     }
 }
 
+function CrearMensajeFinal(resultadoFinal){ //metodo para crear el parrafo final (ganaste o perdiste)
+   
+    //dar visibilidad al boton de reiniciar
+    secctionReiniciar.style.display = 'flex' 
+
+    let sectionMensajes = document.getElementById('resultado') //en la sección que queremos poner el parrafo
+    sectionMensajes.innerHTML = resultadoFinal
+
+    //deshabilitar los botones cuando ya se ganó o perdió
+
+}
 
 
 function reiniciarJuego(){
     location.reload()
 }
 
+function pintarCanvas(){ 
+
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x+mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y+mascotaJugadorObjeto.velocidadY 
+    lienzo.clearRect(0, 0, mapa.width, mapa.height) //funcion que limpia el mapa, en este caso desde la posición 0,0 hasta el ancho y alto del mapa
+    
+    lienzo.drawImage(
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+
+    mascotaJugadorObjeto.pintarMokepon()
+    hipodogeEnemigo.pintarMokepon()
+    ratihueyaEnemigo.pintarMokepon()
+    capipepoEnemigo.pintarMokepon()
+    pydosEnemigo.pintarMokepon()
+    langostelvisEnemigo.pintarMokepon()
+    tucapalmaEnemigo.pintarMokepon()
+
+    if(mascotaJugadorObjeto.velocidadX !==0 || mascotaJugadorObjeto.velocidadY !==0){
+        revisarColision(hipodogeEnemigo)
+        revisarColision(ratihueyaEnemigo)
+        revisarColision(capipepoEnemigo)
+        revisarColision(langostelvisEnemigo)
+        revisarColision(pydosEnemigo)
+        revisarColision(tucapalmaEnemigo)
+    }
+}
+
+function moverDerecha(){ //aumentamos 5px a la posición del personaje y luego lo repintamos
+    mascotaJugadorObjeto.velocidadX = 5
+    
+}
+
+function moverIzquierda(){
+    mascotaJugadorObjeto.velocidadX = -5
+}
+
+function moverArriba(){
+    mascotaJugadorObjeto.velocidadY = -5
+}
+
+function moverAbajo(){
+    mascotaJugadorObjeto.velocidadY = 5
+}
+
+function detenerMovimiento(){   
+    mascotaJugadorObjeto.velocidadY = 0
+    mascotaJugadorObjeto.velocidadX = 0   
+}
+
+function presionoTecla(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break
+        case 'ArrowDown':
+            moverAbajo()                
+            break
+        case 'ArrowLeft':
+            moverIzquierda()
+            break
+        case 'ArrowRight':
+            moverDerecha() 
+            break
+        default:
+            break
+    }
+}
+
+function iniciarMapa(){
+   
+    mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
+    intervalo = setInterval(pintarCanvas, 50) //setInterval me ejecuta repetidamente una función, segundo parametro es en ms que es cada cuanto tiempo va a ejecutar esa función
+    console.log(mascotaJugadorObjeto)
+    window.addEventListener('keydown', presionoTecla)
+    window.addEventListener('keyup', detenerMovimiento)
+}
+
+function obtenerObjetoMascota(){
+    for (let i = 0; i < mokepones.length; i++) {
+        if(mascotaJugador === mokepones[i].nombre){
+            return mokepones[i]
+        }
+        
+    }
+}
+
+function revisarColision(enemigo){
+    const  arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y+enemigo.alto
+    const derechaEnemigo = enemigo.x+enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const  arribaMascota = mascotaJugadorObjeto.y
+    const abajoMascota = mascotaJugadorObjeto.y+mascotaJugadorObjeto.alto
+    const derechaMascota = mascotaJugadorObjeto.x+mascotaJugadorObjeto.ancho
+    const izquierdaMascota = mascotaJugadorObjeto.x
+    
+    if(
+        abajoMascota < arribaEnemigo ||
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ){
+        return
+    } else{
+        //console.log("hay colision")
+        sectionSeleccionarAtaque.style.display = 'flex'
+        secctionVerMapa.style.display = 'none'
+        seleccionarMascotaEnemigo(enemigo)
+        detenerMovimiento()
+        
+    }
+    clearInterval(intervalo) //me limpia el ciclo de repetir la función cada intervalo
+}
 
 window.addEventListener('load', iniciarJuego) //cuando cargue el html va a inicia el js
 
