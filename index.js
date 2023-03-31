@@ -28,6 +28,10 @@ class Jugador { //id del jugador
         this.x = x
         this.y = y
     }
+
+    asignarAtaques(ataques){
+        this.ataques = ataques
+    }
 }
 
 class Mokepon{ //mokepon del jugador
@@ -82,6 +86,27 @@ app.post("/mokepon/:jugadorId/posicion", (req, res) => {
     })
 })
 
+app.post("/mokepon/:jugadorId/ataques", (req, res) =>{
+    const jugadorId = req.params.jugadorId || "" // || "" en caso de que no venga se le asigna una cadena vacia
+    const ataques = req.body.ataques  || [] //tiene que ser la misma variable que cramos en el frontend, extraemos el mokepon del body
+    
+    const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id) //la fxn findIndex me da la posición del elemento biuscado o -1 si no lo encuentra
+
+    if(jugadorIndex >= 0){
+        jugadores[jugadorIndex].asignarAtaques(ataques) //asignamos el mokepon al jugador
+    }
+
+    res.end()
+})
+
+app.get("/mokepon/:jugadorId/ataques", (req, res) =>{
+    const jugadorId = req.params.jugadorId || ""
+    const jugador  = jugadores.find((jugador) => jugador.id === jugadorId)
+    
+    res.send({
+        ataques: jugador.ataques || []
+    })
+})
 
 app.listen(8080, () =>{ //crear servidor en el puerto 8080
     console.log("Servidor funcionando")

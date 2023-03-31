@@ -59,6 +59,7 @@ mapaBackground.src = "imagenes/mokemap.png";
 let alturaBuscada 
 let anchoDelMapa = window.innerWidth - 20
 let jugadorId = null //esta es para json
+let enemigoId = null
 
 
 
@@ -326,14 +327,45 @@ function secuenciaAtaque(){ //se crea un array de los ataques del jugador
                 boton.style.background = 'blue' 
                 boton.disabled = true  
             }
-            ataqueAleatorioEnemigo()
+            if(ataqueJugador.length === 5){
+                enviarAtques()
+            }
         })
-    })
-    
+    }) 
 }
 
+function enviarAtques(){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`,{
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ataques: ataqueJugador
+        }),
+    });
+
+    intervalo = setInterval(obtenerAtaques, 50) //esta funcion pregunta cada 50 ms si ya el enemigo envío sus ataques
+}
+
+function obtenerAtaques(){
+    fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`)
+     .then(function(res){
+        if(res.ok){
+            res.json()
+             .then(function({ ataques }){
+                if(ataques.length === 5){
+                    ataqueEnemigo = ataques
+                    combate()
+                }
+             })
+        }
+     })
+}
+
+//
 function seleccionarMascotaEnemigo(enemigo){  
-    ataquesMokeponEnemigo = enemigo.ataques
+    //ataquesMokeponEnemigo = enemigo.ataques
     DibujarMacotasElegidas(imagenMascotaJugador, enemigo.foto, enemigo.nombre)
     secuenciaAtaque()
 }
@@ -370,19 +402,16 @@ function ataqueAleatorioEnemigo(){ //
    iniciarPelea()
 }
 
-function iniciarPelea(){
-    if(ataqueJugador.length === 5){
-        Combate()
-    }
-}
+
 
 function indexAmbosOponentes(jugador, enemigo){
     indexAtaqueJugador = ataqueJugador[jugador]
     indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
-function Combate(){  //ataque enemigo vs mi ataque
-    
+function combate(){  //ataque enemigo vs mi ataque
+
+    clearInterval(intervalo)
     for (let i = 0; i < ataqueJugador.length; i++) {
         if(ataqueEnemigo[i] === ataqueJugador[i]){
             indexAmbosOponentes(i, i)
@@ -469,7 +498,11 @@ function pintarCanvas(){
 
     enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y) //esta función envia la posición a el backend
     
-    
+    mokeponesEnemigos.forEach(function (mokepon) {
+        enemigoId =  mokepon.id
+        mokepon.pintarMokepon()
+        revisarColision(mokepon) 
+    }) 
 
    
 }
@@ -491,25 +524,26 @@ function enviarPosicion(x, y){
              .then(function({enemigos}){  //es como decir respuesta.enemigos, no olvidar llaves
                 //recordad que los enemigos vienen del backend
                 console.log(enemigos)
-                enemigos.forEach(function (enemigo){
+                mokeponesEnemigos = enemigos.map(function (enemigo){
                     const mokeponNombre =  enemigo.mokepon.nombre || ""
                     let mokeponEnemigo = null
                     if(mokeponNombre === "Hipodoge"){
-                        mokeponEnemigo = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5, 'imagenes/hipodoge.png')
+                        mokeponEnemigo = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5, 'imagenes/hipodoge.png', enemigo.id)
                     }else if(mokeponNombre === "Capipepo"){
-                        mokeponEnemigo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5, 'imagenes/capipepo.png')
+                        mokeponEnemigo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5, 'imagenes/capipepo.png', enemigo.id)
                     }else if(mokeponNombre === "Ratihueya"){
-                        mokeponEnemigo = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5, 'imagenes/ratigueya.png')
+                        mokeponEnemigo = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5, 'imagenes/ratigueya.png', enemigo.id)
                     }else if(mokeponNombre === "Langostelvis"){
-                        mokeponEnemigo = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5, 'imagenes/langostelvis.png')
+                        mokeponEnemigo = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5, 'imagenes/langostelvis.png', enemigo.id)
                     }else if(mokeponNombre === "Pydos"){
-                        mokeponEnemigo = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png')
+                        mokeponEnemigo = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png', enemigo.id)
                     }else if(mokeponNombre === "Tucapalma"){
-                        mokeponEnemigo = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png')
+                        mokeponEnemigo = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png', enemigo.id)
                     }
                     mokeponEnemigo.x = enemigo.x
                     mokeponEnemigo.y = enemigo.y
-                    mokeponEnemigo.pintarMokepon()
+                    enemigoId = enemigo.id
+                    return mokeponEnemigo;
                 })
              })
         }
@@ -586,6 +620,8 @@ function revisarColision(enemigo){
     const derechaMascota = mascotaJugadorObjeto.x+mascotaJugadorObjeto.ancho
     const izquierdaMascota = mascotaJugadorObjeto.x
     
+    
+
     if(
         abajoMascota < arribaEnemigo ||
         arribaMascota > abajoEnemigo ||
@@ -593,14 +629,17 @@ function revisarColision(enemigo){
         izquierdaMascota > derechaEnemigo
     ){
         return
-    } else{
+    }
         //console.log("hay colision")
+       
+        console.log(enemigoId)
         sectionSeleccionarAtaque.style.display = 'flex'
         secctionVerMapa.style.display = 'none'
-        seleccionarMascotaEnemigo(enemigo)
+       seleccionarMascotaEnemigo(enemigo)
         detenerMovimiento()
+
         
-    }
+    
     clearInterval(intervalo) //me limpia el ciclo de repetir la función cada intervalo
 }
 
