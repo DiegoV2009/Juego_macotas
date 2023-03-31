@@ -58,7 +58,7 @@ let mapaBackground = new Image()
 mapaBackground.src = "imagenes/mokemap.png";
 let alturaBuscada 
 let anchoDelMapa = window.innerWidth - 20
-
+let jugadorId = null //esta es para json
 
 
 
@@ -106,113 +106,68 @@ let langostelvis = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langos
 let pydos = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png')
 let tucapalma = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png')
 
-let hipodogeEnemigo = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5, 'imagenes/hipodoge.png')
-let capipepoEnemigo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5, 'imagenes/capipepo.png')
-let ratihueyaEnemigo = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5, 'imagenes/ratigueya.png')
-let langostelvisEnemigo = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5, 'imagenes/langostelvis.png')
-let pydosEnemigo = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png')
-let tucapalmaEnemigo = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png')
 
-hipodoge.ataques.push(
+
+const HIPODOGE_ATAQUES = [
     {nombre: '💧', id :'boton_agua'},    
     {nombre: '💧', id :'boton_agua'},
     {nombre: '💧', id :'boton_agua'},
     {nombre: '🔥', id :'boton_fuego'},
     {nombre: '🌱', id :'boton_tierra'}
-)
+]
 
-capipepo.ataques.push(
+const CAPIPEPO_ATAQUES = [
     {nombre: '🌱', id :'boton_tierra'},
     {nombre: '🌱', id :'boton_tierra'},
     {nombre: '🌱', id :'boton_tierra'},
     {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_fuego'},
-)
+    {nombre: '🔥', id :'boton_fuego'}
+]
 
+const RATIHUEYA_ATQUES = [
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🌱', id :'boton_tierra'}  
+]
+
+const TUCAPALMA_ATAQUES = [
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+]
+
+const LANGOSTELVIS_ATAQUES = [
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🌱', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+]
+
+const PYDOS_ATAQUES = [
+    {nombre: '💧', id :'boton_agua'},    
+    {nombre: '💧', id :'boton_agua'},
+    {nombre: '🔥', id :'boton_agua'},
+    {nombre: '🌱', id :'boton_fuego'},
+    {nombre: '🌱', id :'boton_tierra'}
+]
+hipodoge.ataques.push(...HIPODOGE_ATAQUES) //los 3 puntos (...) son para que no se comporte como una lsita sino como si todo lo que esta en la variable HIPODOGE_ATAQUES se hubiese escrito dentro de los parentesis
+capipepo.ataques.push(...CAPIPEPO_ATAQUES)
 ratihueya.ataques.push( //push para agregar elementos a un arreglo
     //creamos un objeto el cual solo tendra info, no requiere de clase
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🌱', id :'boton_tierra'}
+    ...RATIHUEYA_ATQUES
 )
+tucapalma.ataques.push(...TUCAPALMA_ATAQUES)
+langostelvis.ataques.push(...LANGOSTELVIS_ATAQUES)
+pydos.ataques.push(...PYDOS_ATAQUES)
 
-tucapalma.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
 
-langostelvis.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🌱', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
-
-pydos.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🌱', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
-
-hipodogeEnemigo.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
-
-capipepoEnemigo.ataques.push(
-    {nombre: '🌱', id :'boton_tierra'},
-    {nombre: '🌱', id :'boton_tierra'},
-    {nombre: '🌱', id :'boton_tierra'},
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_fuego'},
-)
-
-ratihueyaEnemigo.ataques.push( //push para agregar elementos a un arreglo
-    //creamos un objeto el cual solo tendra info, no requiere de clase
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
-
-tucapalmaEnemigo.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
-
-langostelvisEnemigo.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🌱', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
-
-pydosEnemigo.ataques.push(
-    {nombre: '💧', id :'boton_agua'},    
-    {nombre: '💧', id :'boton_agua'},
-    {nombre: '🔥', id :'boton_agua'},
-    {nombre: '🌱', id :'boton_fuego'},
-    {nombre: '🌱', id :'boton_tierra'}
-)
 
 mokepones.push(hipodoge, capipepo, ratihueya, tucapalma, langostelvis, pydos)
-mokeponesEnemigos.push(hipodogeEnemigo, capipepoEnemigo, ratihueyaEnemigo, tucapalmaEnemigo, langostelvisEnemigo, pydosEnemigo)
 
 function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado todo el html  
     //esconder los ataques y el boton de reiniciar del html, mientras no hemos elegido la mascota
@@ -256,9 +211,10 @@ function unirseAlJuego(){
     fetch("http://localhost:8080/unirse") //para get
         .then(function (res){ //cuando ya ejecute fetch que es una función asincrona
             if(res.ok){ //ok es si la petición se cumplio
-                res.text()
+                res.text() 
                     .then(function(respueta){
                         console.log(respueta)
+                        jugadorId = respueta //el id del jugador
                     })
             }
         })
@@ -300,8 +256,23 @@ function seleccionarMascotaJugador(){
     }else{
         alert("No seleccionaste una mascota")
     }
+
+    seleccionarMokepon(mascotaJugador)
+
     iniciarMapa()    
     extraerAtaques(mascotaJugador)
+}
+
+function seleccionarMokepon(mascotaJugador){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`, { //comillas simples para poder agregar ${}
+        method: "post", //metodo post
+        headers:{
+            "Content-Type": "application/json" //se dice que estamos usando formato json application con doble p
+        },
+        body: JSON.stringify({ //nuestra petición, con esta función tomamos el JSON y lo convertimos en cadena de texto 
+            mokepon: mascotaJugador  //esta varibale va para el backend
+        })
+    })
 }
 
 function extraerAtaques(mascotaJugador){
@@ -495,21 +466,54 @@ function pintarCanvas(){
     )
 
     mascotaJugadorObjeto.pintarMokepon()
-    hipodogeEnemigo.pintarMokepon()
-    ratihueyaEnemigo.pintarMokepon()
-    capipepoEnemigo.pintarMokepon()
-    pydosEnemigo.pintarMokepon()
-    langostelvisEnemigo.pintarMokepon()
-    tucapalmaEnemigo.pintarMokepon()
 
-    if(mascotaJugadorObjeto.velocidadX !==0 || mascotaJugadorObjeto.velocidadY !==0){
-        revisarColision(hipodogeEnemigo)
-        revisarColision(ratihueyaEnemigo)
-        revisarColision(capipepoEnemigo)
-        revisarColision(langostelvisEnemigo)
-        revisarColision(pydosEnemigo)
-        revisarColision(tucapalmaEnemigo)
-    }
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y) //esta función envia la posición a el backend
+    
+    
+
+   
+}
+
+function enviarPosicion(x, y){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, { //la posicion del jugador
+        method : "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x, //x:x se puede abreviar cuando hay mismosnombres
+            y
+        })
+    }) 
+    .then(function(res){ 
+        if (res.ok){ //si hubo respuesta de jugador id
+            res.json()
+             .then(function({enemigos}){  //es como decir respuesta.enemigos, no olvidar llaves
+                //recordad que los enemigos vienen del backend
+                console.log(enemigos)
+                enemigos.forEach(function (enemigo){
+                    const mokeponNombre =  enemigo.mokepon.nombre || ""
+                    let mokeponEnemigo = null
+                    if(mokeponNombre === "Hipodoge"){
+                        mokeponEnemigo = new Mokepon('Hipodoge', 'imagenes/mokepons_mokepon_hipodoge_attack.png', 5, 'imagenes/hipodoge.png')
+                    }else if(mokeponNombre === "Capipepo"){
+                        mokeponEnemigo = new Mokepon('Capipepo', 'imagenes/mokepons_mokepon_capipepo_attack.png', 5, 'imagenes/capipepo.png')
+                    }else if(mokeponNombre === "Ratihueya"){
+                        mokeponEnemigo = new Mokepon('Ratihueya', 'imagenes/mokepons_mokepon_ratigueya_attack.png', 5, 'imagenes/ratigueya.png')
+                    }else if(mokeponNombre === "Langostelvis"){
+                        mokeponEnemigo = new Mokepon('Langostelvis', 'imagenes/mokepons_mokepon_langostelvis_attack.png', 5, 'imagenes/langostelvis.png')
+                    }else if(mokeponNombre === "Pydos"){
+                        mokeponEnemigo = new Mokepon('Pydos', 'imagenes/mokepons_mokepon_pydos_attack.png', 5, 'imagenes/pydops.png')
+                    }else if(mokeponNombre === "Tucapalma"){
+                        mokeponEnemigo = new Mokepon('Tucapalma', 'imagenes/mokepons_mokepon_tucapalma_attack.png', 5, 'imagenes/tucapalma.png')
+                    }
+                    mokeponEnemigo.x = enemigo.x
+                    mokeponEnemigo.y = enemigo.y
+                    mokeponEnemigo.pintarMokepon()
+                })
+             })
+        }
+     })
 }
 
 function moverDerecha(){ //aumentamos 5px a la posición del personaje y luego lo repintamos
