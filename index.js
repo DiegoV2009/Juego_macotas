@@ -9,6 +9,7 @@ const cors = require("cors") //libreria para peticiones desde otros origenes dif
 
 const app = express() //una copia de express
 
+app.use(express.static('public'))
 app.use(cors())
 app.use(express.json())
 

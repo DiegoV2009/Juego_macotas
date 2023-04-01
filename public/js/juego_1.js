@@ -206,10 +206,10 @@ function iniciarJuego(){ //escucahdor de botones, para cuando ya se haya cargado
 }
 
 function unirseAlJuego(){
-    //fetch("http://localhost:8080/unirse", {
+    //fetch("http://192.168.0.14:8080/unirse", {
     //    method: "post"
     //}) para un post
-    fetch("http://localhost:8080/unirse") //para get
+    fetch("http://192.168.0.14:8080/unirse") //para get
         .then(function (res){ //cuando ya ejecute fetch que es una función asincrona
             if(res.ok){ //ok es si la petición se cumplio
                 res.text() 
@@ -231,7 +231,7 @@ function seleccionarMascotaJugador(){
    //sectionSeleccionarAtaque.style.display = 'flex'
     secctionVerMapa.style.display = 'flex'
     //esconder la sección de elegir mascota
-    sectionSeleccionarMacota.style.display = 'none'
+   
     sectionTitulo.style.display = 'none'
 
    
@@ -256,8 +256,10 @@ function seleccionarMascotaJugador(){
         imagenMascotaJugador = tucapalma.foto
     }else{
         alert("No seleccionaste una mascota")
+        return
     }
 
+    sectionSeleccionarMacota.style.display = 'none'
     seleccionarMokepon(mascotaJugador)
 
     iniciarMapa()    
@@ -265,7 +267,7 @@ function seleccionarMascotaJugador(){
 }
 
 function seleccionarMokepon(mascotaJugador){
-    fetch(`http://localhost:8080/mokepon/${jugadorId}`, { //comillas simples para poder agregar ${}
+    fetch(`http://192.168.0.14:8080/mokepon/${jugadorId}`, { //comillas simples para poder agregar ${}
         method: "post", //metodo post
         headers:{
             "Content-Type": "application/json" //se dice que estamos usando formato json application con doble p
@@ -335,7 +337,7 @@ function secuenciaAtaque(){ //se crea un array de los ataques del jugador
 }
 
 function enviarAtques(){
-    fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`,{
+    fetch(`http://192.168.0.14:8080/mokepon/${jugadorId}/ataques`,{
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -349,7 +351,7 @@ function enviarAtques(){
 }
 
 function obtenerAtaques(){
-    fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`)
+    fetch(`http://192.168.0.14:8080/mokepon/${enemigoId}/ataques`)
      .then(function(res){
         if(res.ok){
             res.json()
@@ -508,7 +510,7 @@ function pintarCanvas(){
 }
 
 function enviarPosicion(x, y){
-    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, { //la posicion del jugador
+    fetch(`http://192.168.0.14:8080/mokepon/${jugadorId}/posicion`, { //la posicion del jugador
         method : "post",
         headers: {
             "Content-Type": "application/json"
